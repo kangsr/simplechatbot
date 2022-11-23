@@ -25,22 +25,26 @@
     </form>
 
     {% if response != NULL %}
-    <div>
-        병원명 : {{response.name}}
 
-    </div>
-    <div>
-        주소 : {{response.location}}
-    </div>
-    <div>
-        전화번호 : {{response.call}}
-    </div>
-    <div>
-        진료시간 : {{response.time}}
-    </div>
-    <div>
-        링크 : <a href="{{response.link}}">{{response.link}}</a>
-    </div>
+        {% for i in response %}
+
+            <div>
+                병원명 : {{i.name}}
+
+            </div>
+            <div>
+                주소 : {{i.location}}
+            </div>
+            <div>
+                전화번호 : {{i.call}}
+            </div>
+            <div>
+                진료시간 : {{i.time}}
+            </div>
+            <div>
+                링크 : <a href="{{response.link}}">{{i.link}}</a>
+            </div>
+        {% endfor %}
     {% endif %}
 </body>
 </html>

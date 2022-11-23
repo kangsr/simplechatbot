@@ -19,7 +19,9 @@ def userin(request):
     responses={
         'greet':'Hello! How can I help you?',
         'timings':'We are open from 9AM to 5PM, Monday to Friday. We are closed on weekends and public holidays.',
-        '내과':{'name':'내과이름', 'location':'숭실대근처','call':"02-1234-1234",'time':'시간','link':'https://blog.naver.com/mrtop2020'},
+        '내과':[{'name':'내과이름', 'location':'숭실대근처','call':"02-1234-1234",'time':'시간','link':'https://blog.naver.com/mrtop2020'},
+                {'name':'내과이름2', 'location':'숭실대근처','call':"02-1234-1234",'time':'시간','link':'https://blog.naver.com/mrtop2020'}
+        ],
         '치과':'치과병원1정보',
         'fallback':'I dont quite understand. Could you repeat that?',
     }
