@@ -23,8 +23,24 @@
 
 
     </form>
+
+    {% if response != NULL %}
     <div>
-        {{response}}
+        병원명 : {{response.name}}
+
     </div>
+    <div>
+        주소 : {{response.location}}
+    </div>
+    <div>
+        전화번호 : {{response.call}}
+    </div>
+    <div>
+        진료시간 : {{response.time}}
+    </div>
+    <div>
+        링크 : <a href="{{response.link}}">{{response.link}}</a>
+    </div>
+    {% endif %}
 </body>
 </html>
