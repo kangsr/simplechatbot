@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <h1>병원 정보 챗봇입니다.</h1>
+    <h2>어떤 병원을 찾고계신가요?</h2>
+    <a href="{% url 'home' %}"><button>홈</button></a>
+
+
+</head>
+<body>
+
+
+    <form action="{% url 'userin' %}" method="GET">
+        {% csrf_token %}
+        <div>
+            <input type="text" name='query' id="query">
+        </div>
+
+
+    </form>
+    <div>
+        {{response}}
+    </div>
+</body>
+</html>
