@@ -7,7 +7,7 @@
     <title>Document</title>
 
     <h1>숭실대 근처 병원 정보 챗봇입니다.</h1>
-    <h2>어떤 병원을 찾고계신가요?</h2>
+    <h2>어떤 증상이 있으신가요?</h2>
     <a href="{% url 'home' %}"><button>홈</button></a>
 
 
@@ -18,20 +18,37 @@
     <form action="{% url 'userin' %}" method="GET">
         {% csrf_token %}
         <div>
-            <input type="text" name='query' id="query">
+            <input type="text" name='query' id="query", placeholder="ex) 눈이 아파요">
+            <button type="submit">입력</button>
         </div>
 
 
     </form>
+    <hr>
 
     {% if response != NULL %}
 
+
         {% for i in response %}
-                {{i.suggest}}
+            <h2>{{i.suggest}}</h2>
+            {% if i.suggest != NULL %}
+
+                <form action="{% url 'userin' %}" method="GET">
+                    {% csrf_token %}
+                    <div>
+                        <input type="text" name='query' id="query", placeholder="ex)근처에 안과 있나요?">
+                        <button type="submit">입력</button>
+                    </div>
+
+
+                </form>
+            {% endif %}
+
             <div>
-                {{i.name}}
+                <h4>{{i.name}}</h4>
 
             </div>
+
             <div>
                 {{i.location}}
             </div>
@@ -44,6 +61,7 @@
             <div>
                 <a href="{{response.link}}">{{i.link}}</a>
             </div>
+            <hr>
         {% endfor %}
     {% endif %}
 </body>
