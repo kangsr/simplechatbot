@@ -14,6 +14,7 @@ def userin(request):
     #########################################
     keywords['내과']=['내과','내과의원']
     keywords['치과']=['치과','치과의원']
+    keywords['내과검색'] = ['배']
     #여기 키워드를 추가해주세요
     ###########################################
 
@@ -30,6 +31,7 @@ def userin(request):
         '치과':[{'name':'치과이름1', 'location':'숭실대근처','call':"02-1234-1234",'time':'시간','link':'https://blog.naver.com/mrtop2020'},
                 {'name':'치과이름2', 'location':'숭실대근처','call':"02-1234-1234",'time':'시간','link':'https://blog.naver.com/mrtop2020'}
         ],
+        '내과검색':[{'suggest':'내과를 입력하세요'}],
         ##여기 병원 정보를 추가해주세요
         #########################################################################
         'fallback':'I dont quite understand. Could you repeat that?',

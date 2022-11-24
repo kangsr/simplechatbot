@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <h1>병원 정보 챗봇입니다.</h1>
+    <h1>숭실대 근처 병원 정보 챗봇입니다.</h1>
     <h2>어떤 병원을 찾고계신가요?</h2>
     <a href="{% url 'home' %}"><button>홈</button></a>
 
@@ -27,22 +27,22 @@
     {% if response != NULL %}
 
         {% for i in response %}
+                {{i.suggest}}
+            <div>
+                {{i.name}}
 
-            <div>
-                병원명 : {{i.name}}
-
             </div>
             <div>
-                주소 : {{i.location}}
+                {{i.location}}
             </div>
             <div>
-                전화번호 : {{i.call}}
+                {{i.call}}
             </div>
             <div>
-                진료시간 : {{i.time}}
+                {{i.time}}
             </div>
             <div>
-                링크 : <a href="{{response.link}}">{{i.link}}</a>
+                <a href="{{response.link}}">{{i.link}}</a>
             </div>
         {% endfor %}
     {% endif %}
