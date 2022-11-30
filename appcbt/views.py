@@ -3,10 +3,10 @@ from django.views.generic.base import TemplateView
 import re
 # Create your views here.
 
-class gohomeview(TemplateView):
-    template_name = ''
+
 def gohome(request):
     return render(request, 'home.html', {request:' '})
+
 def userin(request):
     keywords={}
     keywords_dict={}
@@ -23,7 +23,7 @@ def userin(request):
     keywords['한의원']=['한의원']
 
     keywords['안과검색'] = ['눈','시력']
-    keywords['피부과검색'] = ['여드름','가려움']
+    keywords['피부과검색'] = ['피부가','여드름','가려움']
     keywords['치과검색'] = ['충치','잇몸']
     keywords['한의원검색'] = ['한약']
     ##
@@ -34,9 +34,8 @@ def userin(request):
         # Joining the values in the keywords dictionary with the OR (|) operator updating them in keywords_dict dictionary
         keywords_dict[intent]=re.compile('|'.join(keys))
         print (keywords_dict)
+
     responses={
-        'greet':'Hello! How can I help you?',
-        'timings':'We are open from 9AM to 5PM, Monday to Friday. We are closed on weekends and public holidays.',
         '내과':[{'name':'내과이름1', 'location':'숭실대근처','call':"02-1234-1234",'time':'시간','link':'https://blog.naver.com/mrtop2020'},
                 {'name':'내과이름2', 'location':'숭실대근처','call':"02-1234-1234",'time':'시간','link':'https://blog.naver.com/mrtop2020'}
         ],
@@ -44,7 +43,7 @@ def userin(request):
                 {'name':'치과이름2', 'location':'숭실대근처','call':"02-1234-1234",'time':'시간','link':'https://blog.naver.com/mrtop2020'}
         ],
         '내과검색':[{'suggest':'내과 방문을 추천합니다. 저에게 내과를 물어보세요.'}],
-        ##
+
         '안과':[{'name':'상도밝은안과의원', 'location':'서울 동작구 상도로 301 의암빌딩 2층','call':"02-812-2375",'time':'9:30-19:00(13:00-14:00휴게시간)','link':'https://naver.me/5pNHOhyV'},
                 {'name':'드림아이안과의원', 'location':'서울 동작구 사당로 230-1','call':"0507-1441-5091",'time':'9:30-18:30(13:00-14:00휴게시간)','link':'https://naver.me/FHYu1fpG'},
                 {'name':'연세안과의원', 'location':'서울 관악구 관악로 203 엔젤빌딩','call':"02-886-3800",'time':'9:00-18:30(13:00-14:00휴게시간)','link':'https://naver.me/F8Kn8ewK'},
@@ -80,30 +79,24 @@ def userin(request):
     }
 
 
-    print ("Welcome to MyBank. How may I help you?")
-    print(request.GET)
-    # While loop to run the chatbot indefinetely
     while (True):
-        # Takes the user input and converts all characters to lowercase
-        # user_input = input().lower()
+        #홈화면으로부터 사용자 입력 문장을 입력받는다.
         user_input = request.GET.get('query')
-        # Defining the Chatbot's exit condition
-        if user_input == 'quit':
-            print ("Thank you for visiting.")
-            break
+
         matched_intent = None
         for intent,pattern in keywords_dict.items():
-            # Using the regular expression search function to look for keywords in user input
+            #정규식을 사용해 사용자 입력에서 키워드 추출
             if re.search(pattern, user_input):
-                # if a keyword matches, select the corresponding intent from the keywords_dict dictionary
+                #키워드가 매칭되면, keyword_dict 에서 의도를 고른다.
                 matched_intent=intent
+
         # The fallback intent is selected by default
         key='fallback'
         if matched_intent in responses:
-            # If a keyword matches, the fallback intent is replaced by the matched intent as the key for the responses dictionary
+            #키워드가 매칭되면, 응답 딕셔너리의 키로 사용된다.
             key = matched_intent
-        # The chatbot prints the response that matches the selected intent
-        print (responses[key])
+
+        #응답을 rsp에 저장해 home 화면으로 보낸다.
         rsp=responses[key]
         break
     return render(request,'home.html',{'response':rsp})
