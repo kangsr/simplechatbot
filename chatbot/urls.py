@@ -19,8 +19,6 @@ from appcbt import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', views.gohomeview.as_view(template_name='home.html'), name='home'),
     path('', views.gohome, name='home'),
-
     path('userin/',  views.userin, name='userin'),
 ]
